@@ -1,0 +1,25 @@
+{
+  "name": "typescript-projects",
+  "version": "1.0.0",
+  "description": "It's learning of typescript and design patterns advance concepts from scratch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel ./maps/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilalmetla/typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bilalmetla/typescript/issues"
+  },
+  "homepage": "https://github.com/bilalmetla/typescript#readme",
+  "dependencies": {
+    "@types/faker": "^5.5.7",
+    "faker": "^5.5.3"
+  }
+}
