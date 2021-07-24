@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:buildDir": "mkdir build",
     "start:build": "tsc -w",
     "start:run": "nodemon build/index.js",
     "start": "concurrently npm:start:*"
@@ -15,5 +16,8 @@
   "devDependencies": {
     "concurrently": "^6.2.0",
     "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "@types/node": "^16.3.2"
   }
 }
