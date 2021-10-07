@@ -1,5 +1,5 @@
 
-import { TokenGenerator, SessionToken, Account } from "./Modals";
+import { TokenGenerator, SessionToken, Account, UserCredientials } from "./Modals";
 import { Nedb } from "./db";
 
 export class Authorizer implements TokenGenerator {
@@ -17,14 +17,34 @@ export class Authorizer implements TokenGenerator {
                 {password: account.password},
             ]
         }
-        let userCredientials = await this.db.find('userCredientials', where)
+        let userCredientials: UserCredientials[] = await this.db.find('userCredientials', where)
         if (!userCredientials || userCredientials.length === 0) {
             return undefined
         }
 
-        return {
-            tokenId: Math.random().toString()
-        }   
+        const tokenData = {
+            accessRights: userCredientials[0].accessRights,
+            username: userCredientials[0].username,
+            isValid: true,
+            expirationDate: this.tokenExpiration(),
+            tokenId: this.token()
+        }
+
+        await this.storeToken(tokenData)
+        return tokenData
         
+        
+    }
+
+    tokenExpiration(): Date {
+        return new Date(Date.now()+ (60*60*1000) )
+    }
+
+    token(): string{
+        return Math.random().toString()
+    }
+
+    async storeToken(token: SessionToken) {
+        await this.db.insert('sessionToken', token)
     }
 }

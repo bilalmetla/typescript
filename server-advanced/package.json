@@ -2,9 +2,9 @@
   "name": "server-advanced",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node src/"
+    "start": "ts-node ./"
   },
   "keywords": [],
   "author": "",

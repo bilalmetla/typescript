@@ -1,5 +1,5 @@
 
-import { Server } from './Server'
+import { Server } from './src/Server'
 
 class Launch {
     private server: Server;

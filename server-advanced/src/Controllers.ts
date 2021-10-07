@@ -1,5 +1,5 @@
 
-import { Account, ResponseMessage, SessionToken,  UserCredientials } from "./Modals";
+import { AccessRules, Account, HTTP_CODES, ResponseMessage, SessionToken,  UserCredientials } from "./Modals";
 import { RequestHandler } from "./RequestHnadle";
 import { Router, Request, Response } from "express";
 import { Authorizer } from "./Authorizer";
@@ -24,17 +24,21 @@ export class UserController {
                 let resp = {
                     message: 'Token Not generated'
                 }
-                return res.send(resp)
+                return res.status(HTTP_CODES.NOT_FOUND).send(resp)
             } 
-            return res.send(sessionToken)
+
+            return res.status(HTTP_CODES.OK).send(sessionToken)
             
         } catch (e: any) {
-            return res.send({message:`Error: ${e.message}`})
+            return res.status(HTTP_CODES.BAD_REQUEST).send({message:`Error: ${e.message}`})
         }
         
     }
 
-    async putUserCredientials(credientials: UserCredientials):Promise<any> {
+    async putUserCredientials(credientials: UserCredientials): Promise<any> {
+        credientials.accessRights.push(AccessRules.CREATE)
+        credientials.accessRights.push(AccessRules.READ)
+        credientials.accessRights.push(AccessRules.UPDATE)
         let result = await this.db.insert('userCredientials', credientials);
         console.log(result)
         return result;
