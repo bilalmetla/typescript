@@ -1,5 +1,10 @@
 
-import { AccessRules, Account, HTTP_CODES, ResponseMessage, SessionToken,  UserCredientials } from "./Modals";
+import {
+    AccessRules, Account, HTTP_CODES,
+    ResponseMessage, SessionToken,
+    UserCredientials, User,
+    Tables
+} from "./Modals";
 import { RequestHandler } from "./RequestHnadle";
 import { Router, Request, Response } from "express";
 import { Authorizer } from "./Authorizer";
@@ -39,9 +44,13 @@ export class UserController {
         credientials.accessRights.push(AccessRules.CREATE)
         credientials.accessRights.push(AccessRules.READ)
         credientials.accessRights.push(AccessRules.UPDATE)
-        let result = await this.db.insert('userCredientials', credientials);
+        let result = await this.db.insert(Tables.CREDIENTIALS, credientials);
         console.log(result)
         return result;
+    }
+
+    async putUser(user: User) {
+        return await this.db.insert(Tables.USERS, user)
     }
 
     // async getUserCredientials(username: string, password: string): Promise<UserCredientials>{

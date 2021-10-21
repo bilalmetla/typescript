@@ -5,10 +5,12 @@ export class Nedb {
     public db: any;
     private userCredientials: NEDB;
     private sessionToken: NEDB;
+    private users: NEDB;
 
     constructor() {
         this.userCredientials = new NEDB('./data/userCredientiels.db')
         this.sessionToken = new NEDB('./data/sessionToken.db')
+        this.users = new NEDB('./data/users.db')
         
         
         this.userCredientials.loadDatabase()
@@ -17,6 +19,7 @@ export class Nedb {
         this.db = {
             userCredientials: this.userCredientials,
             sessionToken: this.sessionToken,
+            users: this.users,
         }
     }
 

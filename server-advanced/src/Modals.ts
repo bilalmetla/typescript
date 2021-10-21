@@ -1,5 +1,11 @@
 
 
+export enum Tables{
+    USERS = 'users',
+    CREDIENTIALS = 'userCredientials',
+    TOKENS = 'sessionToken',
+}
+
 export enum AccessRules { 
     CREATE,
     READ,
@@ -44,4 +50,20 @@ export interface ResponseMessage {
 export interface UserCredientials extends Account {
 
     accessRights : AccessRules[]
+}
+
+export interface User {
+    id: number,
+    name: string,
+    age: number,
+    email: string,
+    workingPosition: WorkingPosition
+}
+
+export enum WorkingPosition{
+    JUINIOR,
+    PROGRAMMER,
+    ENGINEER,
+    EXPERT,
+    MANAGER,
 }
